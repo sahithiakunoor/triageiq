@@ -17,7 +17,7 @@ Layer 3  FastAPI (backend) · Streamlit (frontend) · Human-in-the-Loop
 
 - Docker Desktop installed and running
 - 15GB+ free disk space
-- `jira_issues_50k.csv` dataset
+- `jira_issues_50k.csv` dataset ( https://www.kaggle.com/datasets/antonyjr/jira-issue-reports-v1?resource=download)
 - Groq API key (free at [console.groq.com](https://console.groq.com))
 - Google Colab account (free) — for DistilBERT training
 
@@ -29,7 +29,7 @@ The project does **not** ship with pre-trained model weights. You must run the C
 
 ### 1.1 Open the notebook
 
-Go to [colab.research.google.com](https://colab.research.google.com) → File → Upload notebook → upload `SupportIQ_DistilBERT_Finetune.ipynb`
+Go to [colab.research.google.com](https://colab.research.google.com) → File → Upload notebook → upload `TriageIQ_DistilBERT_Finetune.ipynb`
 
 ### 1.2 Enable GPU
 ```
@@ -53,10 +53,10 @@ Runtime → Change runtime type → T4 GPU → Save
 ### 1.4 Place model in project
 ```bash
 # Unzip into the backend folder
-unzip distilbert_classifier.zip -d <path>/supportiq_v3/backend/
+unzip distilbert_classifier.zip -d <path>/triageiq/backend/
 
 # Verify
-ls <path>/supportiq_v3/backend/distilbert_classifier/
+ls <path>/triageiq/backend/distilbert_classifier/
 # Expected: config.json  label_map.json  model.safetensors
 #           tokenizer.json  tokenizer_config.json  training_metrics.json
 ```
@@ -94,7 +94,7 @@ ls <path>/supportiq_v3/backend/distilbert_classifier/
 
 ### 2.1 Create `.env` file
 ```bash
-cd <path>/supportiq_v3
+cd <path>/triageiq
 echo "GROQ_API_KEY=gsk_your_key_here" > .env
 ```
 
@@ -125,7 +125,7 @@ http://localhost:8501
 
 ### 2.5 Seed Knowledge Base
 ```bash
-docker exec supportiq_v3-backend-1 python seed_kb_docs.py
+docker exec triageiq-backend-1 python seed_kb_docs.py
 ```
 
 ---
@@ -133,7 +133,7 @@ docker exec supportiq_v3-backend-1 python seed_kb_docs.py
 ## Every Restart After That
 
 ```bash
-cd <path>/supportiq_v3
+cd <path>/triageiq
 docker-compose up
 ```
 
