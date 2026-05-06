@@ -1,0 +1,29 @@
+Build Tools and Dependency Management Guide
+
+Maven common issues:
+Build failure with 'Could not resolve dependencies': check repository configuration in settings.xml.
+Run mvn dependency:tree to see full dependency graph and identify version conflicts.
+Use mvn enforcer:enforce to detect duplicate dependencies or version conflicts.
+Local repository corruption: delete ~/.m2/repository/[groupId] and re-download.
+Snapshot versions: use -U flag to force update of snapshot dependencies from remote repository.
+
+Gradle common issues:
+Gradle daemon issues: run ./gradlew --stop then retry the build.
+Dependency resolution failure: check repositories block in build.gradle, ensure mavenCentral() is included.
+Version conflicts: use configurations.all { resolutionStrategy.failOnVersionConflict() } to detect early.
+Build cache issues: run ./gradlew clean to force full rebuild.
+
+Dependency version conflicts (all build tools):
+When two libraries require different versions of the same transitive dependency, the higher version typically wins.
+This can cause NoSuchMethodError if an older API is expected. Pin the specific version explicitly.
+Common conflict: different Spring components requiring different versions of spring-core.
+
+Testing issues:
+Test running out of memory: increase with -Xmx in MAVEN_OPTS or jvmArgs in Gradle test task.
+Flaky tests: tests that pass and fail intermittently usually have timing dependencies or shared state.
+Surefire plugin not finding tests: ensure test class name matches *Test.java or *Tests.java pattern.
+
+Release and versioning:
+Semantic versioning: MAJOR.MINOR.PATCH. Breaking changes require MAJOR bump.
+SNAPSHOT versions are development builds not intended for production use.
+Release versions are immutable — never redeploy a released artifact with the same version number.

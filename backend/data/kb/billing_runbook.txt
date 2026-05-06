@@ -1,0 +1,1 @@
+Billing issue runbook: ask for invoice ID, transaction date, payment method, account email, and screenshot. Check Stripe/payment gateway status page. Verify webhook endpoints responding. Review payment-service logs for timeout patterns. Notify finance team immediately for P1 payment incidents. Check for duplicate charges.

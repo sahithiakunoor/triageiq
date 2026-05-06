@@ -1,0 +1,28 @@
+Version Compatibility and Migration Guide
+
+Java version compatibility:
+Java 8: still widely used, all major Apache and Spring projects support it.
+Java 11: LTS version, most modern projects require at minimum Java 11.
+Java 17: current LTS, Spring Boot 3.x requires Java 17 minimum.
+Java 21: latest LTS with virtual threads (Project Loom). Spring Boot 3.2+ supports virtual threads.
+
+Spring Boot version compatibility:
+Spring Boot 2.x supports Java 8, 11, 17. End of OSS support: November 2023.
+Spring Boot 3.x requires Java 17+. Uses Jakarta EE 10 (javax.* renamed to jakarta.*).
+Common migration issue: javax.persistence.* imports must change to jakarta.persistence.* when upgrading to Spring Boot 3.
+
+Apache project compatibility notes:
+Apache Kafka clients are backward compatible with brokers 2 versions older.
+Apache Hadoop 3.x is not compatible with Hadoop 2.x HDFS format without migration.
+Apache Maven plugins must match the Maven version — check plugin compatibility matrix.
+
+Dependency upgrade guidelines:
+Upgrade one major dependency at a time to isolate issues.
+Run the full test suite after each upgrade before proceeding to the next.
+Check the project migration guide or release notes for known breaking changes.
+Use Dependabot or Renovate to automate minor and patch version upgrades.
+
+Hibernate and JPA migrations:
+Hibernate 6 (used in Spring Boot 3) changed many default behaviors from Hibernate 5.
+Column naming strategy changed — verify your schema still matches after upgrading.
+HQL syntax changes in Hibernate 6 — some queries need updating.

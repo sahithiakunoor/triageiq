@@ -1,0 +1,1 @@
+CSV and data export FAQ: exports available for all paid plans. Go to Settings > Data > Export. Exports generated asynchronously and emailed when ready. Under 10k rows typically 5 minutes. Over 100k rows may time out, use paginated API instead. Known issue: empty files caused by background job queue backlog.

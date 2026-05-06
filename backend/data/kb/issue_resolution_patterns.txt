@@ -1,0 +1,32 @@
+Common Issue Resolution Patterns in Open Source Projects
+
+Pattern 1 - Cannot Reproduce:
+Reporter provides insufficient information to reproduce the issue.
+Response: Request minimum reproducible example, exact version numbers, OS, and JDK version.
+If no response within 14 days, close with Cannot Reproduce and invite reporter to reopen with more details.
+
+Pattern 2 - Works as Designed:
+The reported behavior is intentional but not clearly documented.
+Response: Explain the design decision, update documentation to clarify the behavior.
+Close with Won't Fix but improve documentation so others do not hit the same confusion.
+
+Pattern 3 - Duplicate Report:
+The issue has already been reported in another ticket.
+Response: Link to the original ticket, close as Duplicate. If the new report has better information, add it to the original.
+
+Pattern 4 - Version specific regression:
+Bug was introduced in a specific version. Use git bisect to find the commit that introduced it.
+Response: Tag the issue with the affected version range. Backport the fix to maintenance branches if on LTS version.
+
+Pattern 5 - Environment specific issue:
+Works on reporter's machine but not in CI, or works on Linux but not Windows.
+Response: Ask for full environment details. Common causes: line ending differences, case-sensitive filesystem, locale settings.
+
+Pattern 6 - Third party library conflict:
+The issue is caused by a dependency rather than the project itself.
+Response: Document the known conflict in the FAQ. Provide a workaround using dependency exclusions.
+Open an issue with the upstream library if it is their bug to fix.
+
+Pattern 7 - Feature request scope creep:
+A feature request grows to include many sub-features during discussion.
+Response: Create sub-tasks for each discrete piece of work. Implement incrementally across multiple releases.

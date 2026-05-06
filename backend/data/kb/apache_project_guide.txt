@@ -1,0 +1,28 @@
+Apache Software Foundation Project Standards
+
+Issue types used in Apache projects:
+- Bug: something that was working and is now broken, or behaves differently from documented behavior.
+- New Feature: request to add functionality that does not currently exist.
+- Improvement: enhancement to existing functionality without changing core behavior.
+- Task: non-code work such as documentation, dependency updates, or refactoring.
+- Sub-task: child task of a larger story or epic.
+- Test: issue related to missing or failing automated tests.
+
+Priority levels in Apache Jira:
+- Blocker: completely blocks development or testing, no workaround. Must be fixed before release.
+- Critical: severe impact on major functionality. Fix targeted for current release.
+- Major: important issue but does not block release. Scheduled for next sprint.
+- Minor: limited impact. Scheduled when bandwidth allows.
+- Trivial: cosmetic only. Fix in next cleanup sprint.
+
+Workflow states:
+Open → In Progress → Resolved → Closed
+Reopen is allowed if a fix is found to be incomplete.
+Won't Fix is used when the behavior is by design or the effort does not justify the fix.
+
+Component ownership:
+Each Apache project component has designated committers. Tag the correct component to route to the right person.
+Apache Kafka: core, clients, connect, streams, tools.
+Apache Hadoop: hdfs, mapreduce, yarn, common.
+Apache Spark: core, sql, mllib, streaming, graphx.
+Apache Maven: core, plugins, surefire, compiler-plugin.

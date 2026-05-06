@@ -1,0 +1,1 @@
+Login issue runbook: confirm username exists, try password reset, check browser cookies and cache, verify SSO provider status, check MFA device sync, review auth service logs for 401/403 patterns, check account lockout status. Common fix: clear cookies, restart auth-service pod, verify JWT secret rotation.

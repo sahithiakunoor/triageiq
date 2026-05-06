@@ -1,0 +1,1 @@
+Performance issue runbook: ask for region, latency measurements, browser and device, timestamps, specific endpoint, network details, and frequency. Check DB query times in monitoring. Review CPU and memory metrics. Check CDN cache hit rates. Look for N+1 query patterns. Scale horizontally if CPU over 80 percent.

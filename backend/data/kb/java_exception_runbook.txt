@@ -1,0 +1,30 @@
+Java Exception and Stack Trace Analysis Runbook
+
+NullPointerException (NPE):
+Most common Java exception. Indicates a variable is null when a method is called on it.
+Request the full stack trace from the reporter. The line number in the trace points to the exact cause.
+Common causes: uninitialized fields, missing null checks, incorrect Spring bean wiring.
+Ask reporter: what version introduced this? Does it happen on every execution or intermittently?
+
+ClassNotFoundException and NoClassDefFoundError:
+Indicates a class is missing from the classpath at runtime.
+Usually caused by incorrect dependency version or missing transitive dependency.
+Ask for: pom.xml or build.gradle, full dependency tree (mvn dependency:tree), exact Java and build tool version.
+
+OutOfMemoryError:
+Java heap space exhausted. Common in batch processing or large dataset operations.
+Request: JVM heap settings (-Xmx), memory profiler output if available, data volume being processed.
+Workaround: increase heap with -Xmx4g or enable streaming instead of loading all data into memory.
+
+ConcurrentModificationException:
+Collection modified while being iterated. Thread safety issue.
+Common in multi-threaded applications or when modifying a list inside a forEach loop.
+Fix: use Iterator.remove(), CopyOnWriteArrayList, or synchronize access.
+
+StackOverflowError:
+Infinite recursion. Check for circular references in object graphs, especially with Hibernate/JPA entities.
+In Spring: circular bean dependencies cause this. Use @Lazy injection to break the cycle.
+
+Connection timeout and socket exceptions:
+Network or database connectivity issue. Request: network configuration, firewall rules, database host settings.
+Common in Apache HttpClient and Spring RestTemplate. Check connection pool settings and timeout values.

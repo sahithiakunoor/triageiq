@@ -1,0 +1,1 @@
+Escalation policy: P1 includes production outage, security incident, data loss, or total service unavailability. P2 includes major degraded functionality affecting many users. P1 requires immediate escalation to on-call engineer. SLA: P1 1hr response 4hr resolution, P2 4hr response 8hr resolution, P3 8hr response 48hr resolution.

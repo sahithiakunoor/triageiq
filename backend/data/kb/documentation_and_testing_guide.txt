@@ -1,0 +1,31 @@
+Documentation and Testing Standards for Open Source Projects
+
+Writing good bug reports:
+Title: concise description of the problem, not the symptom. Bad: 'NPE in my app'. Good: 'NullPointerException in JdbcTemplate when query returns empty ResultSet'.
+Description: what you expected to happen, what actually happened.
+Reproduction steps: numbered steps that reliably reproduce the issue.
+Environment: Java version, OS, project version, build tool version.
+Attachments: stack trace, minimal code example, test case that fails.
+
+Writing good feature requests:
+Describe the use case, not the implementation. Explain what problem you are trying to solve.
+Include examples of how the API would look if the feature were implemented.
+Reference similar implementations in other projects if applicable.
+Indicate whether you are willing to submit a pull request implementing the feature.
+
+Unit test best practices:
+Each test should test one thing. Test names should describe what is being tested.
+Use the Arrange-Act-Assert pattern consistently.
+Mock external dependencies (databases, HTTP calls) to keep tests fast and deterministic.
+Test edge cases: null input, empty collections, maximum values, concurrent access.
+
+Integration test guidelines:
+Integration tests verify that components work together correctly.
+Use Spring Boot test slices (@WebMvcTest, @DataJpaTest) to test specific layers.
+Avoid starting the full application context in tests unless necessary — it is slow.
+Use Testcontainers for tests that require a real database or message broker.
+
+Code coverage:
+Aim for 80 percent line coverage as a baseline. Coverage above 90 percent often means testing implementation details.
+Focus coverage on business logic, not boilerplate.
+Use mutation testing (PIT) to verify that tests actually catch bugs, not just execute code.

@@ -1,0 +1,11 @@
+# Never bake trained models into the image
+# They should be trained via the UI and persisted via Docker volumes
+models/*.pkl
+models/*.pkl.bak
+chroma_db/
+*.db
+__pycache__/
+*.pyc
+.DS_Store
+.env
+models/*.pkl

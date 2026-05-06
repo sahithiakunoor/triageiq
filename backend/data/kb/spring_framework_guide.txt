@@ -1,0 +1,28 @@
+Spring Framework Issue Handling Guide
+
+Spring Boot auto-configuration issues:
+When a bean is not being created as expected, check auto-configuration order.
+Enable debug logging: logging.level.org.springframework=DEBUG to see which auto-configurations are applied.
+Check for conflicting beans using ApplicationContext.getBeanDefinitionNames().
+Common issue: @ConditionalOnMissingBean not triggering because a bean with a different name exists.
+
+Spring Security issues:
+403 Forbidden errors: check SecurityFilterChain configuration for the URL pattern.
+CSRF token errors: ensure CSRF token is included in POST requests from forms.
+Method security not working: verify @EnableMethodSecurity is present on configuration class.
+JWT authentication: check token expiry, signing key configuration, and filter order.
+
+Spring Data and JPA issues:
+LazyInitializationException: entity accessed outside of transaction scope. Use @Transactional or fetch eagerly.
+N+1 query problem: use JOIN FETCH in JPQL query or @EntityGraph annotation.
+Transaction not rolling back: ensure @Transactional is on a public method in a Spring-managed bean.
+Schema not updating: check spring.jpa.hibernate.ddl-auto setting — use validate in production.
+
+Spring MVC issues:
+404 Not Found: check @RequestMapping path, context path configuration, and whether the controller is scanned.
+Serialization errors: check Jackson configuration for date format, null handling, and custom serializers.
+File upload failures: configure spring.servlet.multipart.max-file-size and max-request-size.
+
+Dependency injection issues:
+UnsatisfiedDependencyException: a required bean is not found. Check component scan base package.
+Circular dependency: use @Lazy on one of the dependencies to break the cycle.

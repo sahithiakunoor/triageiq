@@ -1,0 +1,28 @@
+Bug Report Triage Guide for Open Source Projects
+
+This guide covers how to triage incoming bug reports in Apache, Spring, and JBoss projects.
+
+Step 1 - Verify reproducibility:
+Ask the reporter for exact steps to reproduce. A bug that cannot be reproduced cannot be fixed.
+Request: JDK version, OS, project version, minimal code snippet that demonstrates the issue.
+If the reporter cannot reproduce consistently, label as 'Cannot Reproduce' and ask for more details.
+
+Step 2 - Check if already reported:
+Search existing issues before proceeding. Duplicate issues waste maintainer time.
+Link the duplicate to the original issue and close with status 'Duplicate'.
+
+Step 3 - Determine severity:
+Blocker: prevents core functionality, no workaround exists, affects many users.
+Critical: major feature broken but workaround exists.
+Major: significant issue but limited impact.
+Minor: cosmetic or edge case issue.
+Trivial: typo, minor documentation issue.
+
+Step 4 - Assign component and fix version:
+Tag the correct component (e.g., core, web, security, data, messaging).
+Assign a target fix version only if a maintainer has committed to fixing it.
+Do not assign fix versions to unconfirmed bugs.
+
+Step 5 - Request missing information:
+If the report lacks reproduction steps, version info, or stack trace, add label 'Needs More Info'.
+Close unresponsive issues after 30 days with no response from reporter.

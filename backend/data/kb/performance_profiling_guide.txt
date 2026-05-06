@@ -1,0 +1,30 @@
+Java Application Performance Profiling Guide
+
+Identifying performance bottlenecks:
+Use a profiler (VisualVM, JProfiler, async-profiler) to get CPU and memory flamegraphs.
+High CPU: look for tight loops, inefficient algorithms, excessive string concatenation.
+High memory: look for large collections, object creation in loops, memory leaks.
+
+Common performance anti-patterns in Java:
+String concatenation in loops: use StringBuilder instead of + operator inside a loop.
+Repeated database calls: batch queries or use a cache (Spring Cache, Caffeine, Ehcache).
+Unnecessary object creation: reuse objects where possible, especially in hot paths.
+Blocking I/O on main thread: use async processing or thread pools for I/O operations.
+Synchronization bottlenecks: minimize synchronized blocks, prefer concurrent collections.
+
+JVM tuning for open source applications:
+Heap sizing: start with -Xms and -Xmx set to the same value to avoid heap resizing pauses.
+Garbage collection: G1GC is default in Java 9+. For low-latency, consider ZGC or Shenandoah.
+GC logging: add -Xlog:gc* to see garbage collection activity and pauses.
+Thread dump: use kill -3 [pid] on Linux or jstack [pid] to get thread dump for deadlock analysis.
+
+Database query performance:
+Use EXPLAIN ANALYZE in PostgreSQL to see query execution plan.
+Missing index is the most common cause of slow queries. Add index on columns used in WHERE clauses.
+Avoid SELECT * — specify only the columns you need.
+Use connection pooling (HikariCP in Spring Boot) — never create a new connection per request.
+
+Benchmarking:
+Use JMH (Java Microbenchmark Harness) for accurate micro-benchmarks.
+Warm up the JVM before measuring — first few executions are not representative due to JIT compilation.
+Report results with confidence intervals, not just averages.

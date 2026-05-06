@@ -1,0 +1,1 @@
+Bug triage runbook: collect steps to reproduce, expected behavior, actual behavior, full error logs, environment details, version number, screenshots, and any recent changes. Route reproducible bugs to engineering with complete reproduction case.

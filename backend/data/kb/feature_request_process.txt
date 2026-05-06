@@ -1,0 +1,1 @@
+Feature request process: describe the use case not just the feature. Include affected user count and business impact. High-voted requests over 50 upvotes get expedited review. Timeline: typically 1 to 3 sprints for approved features. Submit via product portal.

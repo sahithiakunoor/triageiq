@@ -1,0 +1,57 @@
+services:
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB:       supportiq
+      POSTGRES_USER:     supportiq
+      POSTGRES_PASSWORD: supportiq_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U supportiq"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://supportiq:supportiq_dev@postgres:5432/supportiq
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      HF_API_KEY:   ${HF_API_KEY:-}
+      CHROMA_PATH:  /app/chroma_db
+      KB_DIR:       /app/data/kb
+      # MODEL_DIR not set — uses Path(__file__).parent/models inside container
+    volumes:
+      - chroma_data:/app/chroma_db
+      - model_data:/app/models        # persist trained XGBoost models across restarts
+      - kb_data:/app/data/kb
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "8501:8501"
+    environment:
+      BACKEND_URL: http://backend:8000
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  pg_data:
+  chroma_data:
+  model_data:
+  kb_data:

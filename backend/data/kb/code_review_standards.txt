@@ -1,0 +1,30 @@
+Open Source Code Review and Contribution Standards
+
+Pull request requirements for Apache and Spring projects:
+- All pull requests must reference a Jira issue number in the title
+- Tests must be included for bug fixes (regression test) and new features
+- Documentation must be updated if public API changes
+- Code style must match project conventions (checkstyle rules must pass)
+- CI build must pass before review begins
+
+Review process:
+Two committer approvals required before merge in most Apache projects.
+One committer approval required for minor fixes and documentation changes.
+Reviewers check: correctness, test coverage, backward compatibility, performance implications.
+A committer veto (-1) blocks the merge and requires discussion to resolve.
+
+Backward compatibility:
+Apache projects follow semantic versioning. Breaking changes require a major version bump.
+Deprecated APIs must remain functional for at least one major version before removal.
+Adding a new required parameter to a public method is a breaking change.
+Adding an optional parameter with a default value is not a breaking change.
+
+Documentation standards:
+Public API methods must have Javadoc with @param, @return, and @throws.
+New features require user-facing documentation in the project wiki or reference docs.
+Configuration properties must be documented with type, default value, and description.
+
+Common review feedback:
+Missing null check on method parameter — add Objects.requireNonNull() or @NonNull annotation.
+Test only covers happy path — add test cases for null input, empty collection, and boundary conditions.
+Magic number in code — extract to named constant with clear meaning.
